@@ -1,5 +1,6 @@
 #!/bin/bash
 # Oscarf
+# Finds duplicated files
 
 declare -a checksums
 
@@ -22,7 +23,7 @@ for file in **; do
   ((i++))
   done
   
-  # if it doesnt matches any other md5sum it isnt duplicated and it is added to the array
+  # if it doesnt match any other md5sum it isnt duplicated and it is added to the array
   if [ $match -ne 1 ]
   then
     checksums[iter]=$checksum
