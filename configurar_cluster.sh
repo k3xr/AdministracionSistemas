@@ -5,11 +5,11 @@ EXPECTED_ARGS=1
 
 if [ $# -ne $EXPECTED_ARGS ]
 then
-    echo "Use: $0 <fichero_configuración>"
+    echo "Use: $0 <fichero_configuracion>"
     exit 1
 fi
 
-# Aqui se comprueba que el archivo de configurado 
+# Aqui se comprueba el archivo de configuracion
 IFS=" ,#"
 while read var1 var2 var3
 do
@@ -18,3 +18,4 @@ do
 	echo "Linea leida: $var1  $var2 $var3"
     fi
 done < "$1"
+
