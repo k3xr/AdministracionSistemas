@@ -11,7 +11,7 @@ fi
 
 # Aqui se comprueba el archivo de configuracion 
 IFS=" ,#"
-while read maquinaIp servicio config
+while read maquina servicio config || [[ -n "$line" ]]
 do
     if [ ! -z $maquina ] || [ ! -z $servicio ] || [ ! -z $config ] 
     then
@@ -20,23 +20,23 @@ do
 	#Ponemos un switch case para actuar segun el servicio
 	case $servicio in
 	    mount)
-			./auxiliar/aux_mount.sh $config $maquina;;
+	       	./auxiliar/aux_mount.sh $config $maquina;;
 	    raid)
-			./auxiliar/aux_raid.sh $config $maquina;;
+       		./auxiliar/aux_raid.sh $config $maquina;;
 	    lvm)
-			./auxiliar/aux_lvm.sh $config $maquina;;
+		./auxiliar/aux_lvm.sh $config $maquina;;
 	    nis_server)
-			./auxiliar/aux_nis_server.sh $config $maquina;;
+		./auxiliar/aux_nis_server.sh $config $maquina;;
 	    nis_client)
-			./auxiliar/aux_nis_client.sh $config $maquina;;
+		./auxiliar/aux_nis_client.sh $config $maquina;;
 	    nfs_server)
-			./auxiliar/aux_nfs_server.sh $config $maquina;;
+		./auxiliar/aux_nfs_server.sh $config $maquina;;
 	    nfs_client)
-			./auxiliar/aux_nfs_client.sh $config $maquina;;
+		./auxiliar/aux_nfs_client.sh $config $maquina;;
 	    backup_server)
-			./auxiliar/aux_backup_server.sh $config $maquina;;
+		./auxiliar/aux_backup_server.sh $config $maquina;;
 	    backup_client)
-			./auxiliar/aux_backup_client.sh $config $maquina;;
+		./auxiliar/aux_backup_client.sh $config $maquina;;
 	esac
 
     fi
