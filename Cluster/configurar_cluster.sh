@@ -1,4 +1,4 @@
-#!/bin/bash
+﻿#!/bin/bash
 
 # Comprobamos que solo nos pasan un argumento
 EXPECTED_ARGS=1
