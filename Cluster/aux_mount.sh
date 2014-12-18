@@ -16,13 +16,11 @@ iter=0
 while read line
 do
 	if [ $iter = 0 ]; then
-		echo "line 1"
 		deviceName=$line
 	elif [ $iter = 1 ]; then
-		echo "line 2"
 		mountPoint=$line
 		
-		# Make changes permanent
+		# Makes changes permanent
 		ssh $2 'echo "#File system: $deviceName" >> /etc/fstab; echo "$deviceName $mountPoint auto defaults,auto,rw 0 0" >> /etc/fstab'
 		
 	else
@@ -33,4 +31,3 @@ do
 	let iter+=1
 done < $1
 IFS=$oldIFS
-
