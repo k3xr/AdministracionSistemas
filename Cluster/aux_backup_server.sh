@@ -22,5 +22,5 @@ do
 		exit 1
 	fi
 	let iter+=1
-done < $1
+done < "$1"
 IFS=$oldIFS

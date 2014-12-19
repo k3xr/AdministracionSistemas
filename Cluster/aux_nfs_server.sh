@@ -5,7 +5,7 @@ EXPECTED_ARGS=2
 
 if [ $# -ne $EXPECTED_ARGS ]
 then
-	echo "Error: not expected args"
+	echo "Error: $0 not expected args"
     exit 1
 fi
 
@@ -17,7 +17,7 @@ while read line || [[ -n "$line" ]]
 do
 	exportedDirs[$(($iter))]=$line	
 	let iter+=1
-done < $1
+done < "$1"
 
 if [ $iter < 1 ]
 then

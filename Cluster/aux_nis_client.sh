@@ -5,7 +5,7 @@ EXPECTED_ARGS=2
 
 if [ $# -ne $EXPECTED_ARGS ]
 then
-	echo "Error: not expected args"
+	echo "Error: $0 not expected args"
     exit 1
 fi
 

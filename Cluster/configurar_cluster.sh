@@ -1,25 +1,26 @@
 ﻿#!/bin/bash
 
-# Comprobamos que solo nos pasan un argumento
+# Checks number of expected args
 EXPECTED_ARGS=1
 
 if [ $# -ne $EXPECTED_ARGS ]
 then
-    echo "Use: $0 <fichero_configuracion>"
+    echo "Use: $0 <config_file>"
     exit 1
 fi
 
-# Aqui se comprueba el archivo de configuracion 
+# Checks config file
 IFS=" ,#"
-while read maquina servicio config || [[ -n "$maquina" ]]
+while read maquina service config || [[ -n "$maquina" ]]
 do
-    if [ ! -z $maquina ] || [ ! -z $servicio ] || [ ! -z $config ] 
+    if [ ! -z $maquina ] || [ ! -z $service ] || [ ! -z $config ] 
     then
-	echo "Linea leida: $maquina $servicio $config"
+	echo "Executing: $maquina $service $config"
 	
-	#Ponemos un switch case para actuar segun el servicio
-	case $servicio in
-	    sudo ./aux_mount.sh $config $maquina;;
+	# Ponemos un switch case para actuar segun el servicio
+	case $service in
+		mount)
+			sudo ./aux_mount.sh $config $maquina;;
 	    raid)
        		sudo ./aux_raid.sh $config $maquina;;
 	    lvm)

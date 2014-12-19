@@ -5,7 +5,7 @@ EXPECTED_ARGS=2
 
 if [ $# -ne $EXPECTED_ARGS ]
 then
-	echo "Error: not expected args"
+	echo "Error: $0 not expected args"
     exit 1
 fi
 
@@ -23,12 +23,14 @@ do
 		volumes[$(($iter-2))]=$line
 	fi    
 	let iter+=1
-done < $1
+done < "$1"
 IFS=$oldIFS
 
 # Install the service
+echo "Installing the service"
 ssh $2 'apt-get install -y lvm2' < /dev/null
-ssh $2 'pvcreate $deviceListInGroup;vgcreate $volumeGroupName $deviceListInGroup' < /dev/null
+ssh $2 'pvcreate $deviceListInGroup' < /dev/null 
+ssh $2 'vgcreate $volumeGroupName $deviceListInGroup' < /dev/null
 
 for sentence in volumes
 do
