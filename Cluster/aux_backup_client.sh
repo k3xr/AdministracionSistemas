@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 
 # Checks number of expected args
 EXPECTED_ARGS=2
@@ -39,4 +39,3 @@ ssh $2 'echo * */'$backupFrequency' * * * root rsync -avz '$localDirForBackup' r
 
 # Restarts cron service
 ssh $2 service cron restart < /dev/null
-

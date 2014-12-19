@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 
 # Checks number of expected args
 EXPECTED_ARGS=2
@@ -10,6 +10,8 @@ then
 fi
 
 # Checks config file
+oldIFS=$IFS
+IFS="\n"
 iter=0
 while read line || [[ -n "$line" ]]
 do
@@ -27,6 +29,7 @@ do
     
 	let iter+=1
 done < "$1"
+IFS=$oldIFS
 
 # Makes changes permanent
 echo "Enviando comando:  mount $deviceName $mountPoint"
