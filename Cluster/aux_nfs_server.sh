@@ -10,8 +10,6 @@ then
 fi
 
 # Checks config file
-oldIFS=$IFS
-IFS="\n"
 iter=0
 while read line || [[ -n "$line" ]]
 do
@@ -24,11 +22,10 @@ then
 	echo "Error in nfs server config file (line expected)"
 	exit 1
 fi
-IFS=$oldIFS
 
 # Installs nfs service
-ssh $2  'apt-get install -y nfs-common' < /dev/null
-ssh $2  'apt-get install -y nfs-kernel-server' < /dev/null
+ssh $2  'apt-get install -y nfs-common -qq --force-yes' < /dev/null
+ssh $2  'apt-get install -y nfs-kernel-server -qq --force-yes' < /dev/null
 
 for item in ${exportedDirs[*]}
 do

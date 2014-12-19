@@ -10,8 +10,6 @@ then
 fi
 
 # Checks config file
-oldIFS=$IFS
-IFS="\n"
 iter=0
 while read line || [[ -n "$line" ]]
 do
@@ -23,4 +21,5 @@ do
 	fi
 	let iter+=1
 done < "$1"
-IFS=$oldIFS
+
+ssh $2  'mkdir --parents $backupDir' < /dev/null

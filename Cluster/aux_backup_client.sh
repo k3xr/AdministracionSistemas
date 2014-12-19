@@ -10,8 +10,6 @@ then
 fi
 
 # Checks config file
-oldIFS=$IFS
-IFS="\n"
 iter=0
 while read line || [[ -n "$line" ]]
 do
@@ -25,13 +23,20 @@ do
 		remoteDirForBackup=$line
 		
 	elif [ $iter = 3 ]; then
-		backupFrequency=$line
+		 =$line
 	else
 		echo "Error in backup client service config file"
 		exit 1
 	fi
 	let iter+=1
 done < "$1"
-IFS=$oldIFS
 
+# Installs rsync if needed
+ssh $2 'apt-get install -y rsync -qq --force-yes' < /dev/null
+
+# Sets cron file to make the backup
+ssh $2 'echo "* */$backupFrequency * * * root rsync -avz $localDirForBackup root@$backupServerAddress:$remoteDirForBackup" >> /etc/crontab' < /dev/null
+
+# Restarts cron service
+ssh $2 'service cron restart' < /dev/null
 

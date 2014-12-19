@@ -10,8 +10,6 @@ then
 fi
 
 # Checks config file
-oldIFS=$IFS
-IFS="\n"
 iter=0
 while read line || [[ -n "$line" ]]
 do
@@ -24,10 +22,9 @@ do
     
 	let iter+=1
 done < "$1"
-IFS=$oldIFS
 
 # Installs NIS service
-ssh $2 'apt-get -y install nis' < /dev/null
+ssh $2 'apt-get -y install nis -qq --force-yes' < /dev/null
 # Configs remote NIS service
 ssh $2 'echo "$domainName" >> /etc/defaultdomain' < /dev/null
 ssh $2 '/usr/lib/yp/ypinit -m' < /dev/null

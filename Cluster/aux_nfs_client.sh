@@ -10,18 +10,15 @@ then
 fi
 
 # Checks config file
-oldIFS=$IFS
-IFS="\n"
 iter=0
 while read line || [[ -n "$line" ]]
 do
 	remoteDir[$(($iter))]=$line	
 	let iter+=1
 done < "$1"
-IFS=$oldIFS
 
 # Installs nfs service
-ssh $2  'apt-get install -y nfs-common' < /dev/null
+ssh $2  'apt-get install -y nfs-common -qq --force-yes' < /dev/null
 
 for item in ${remoteDir[*]}
 do
