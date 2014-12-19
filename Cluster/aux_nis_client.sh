@@ -28,7 +28,7 @@ do
 done < "$1"
 
 # Installs NIS service
-ssh $2 'apt-get -y install nis -qq --force-yes' < /dev/null
+ssh $2 apt-get -y install nis -qq --force-yes < /dev/null > /dev/null
 # Connects to remote NIS server (ypbind). Configuration in /etc/yp.conf + /etc/nsswitch		
-ssh $2 'echo "domain $domainName server $serverToConnect" >> /etc/yp.conf' < /dev/null
-ssh $2 '/etc/init.d/nis start' < /dev/null
+ssh $2 'echo domain '$domainName' server '$serverToConnect' >> /etc/yp.conf' < /dev/null
+ssh $2 /etc/init.d/nis start < /dev/null
