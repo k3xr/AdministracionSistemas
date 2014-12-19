@@ -24,7 +24,7 @@ do
 		#echo 'ssh' $2 '"#File system: '$deviceName'" >> /etc/fstab; echo "'$deviceName' '$mountPoint' auto defaults,auto,rw 0 0" >> /etc/fstab'
 		ssh $2  'whoami' < /dev/null
 	else
-		echo "Error in service config file"
+		echo "Error in mount service config file"
 		exit 1
 	fi
     

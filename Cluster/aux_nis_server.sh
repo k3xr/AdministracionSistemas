@@ -13,7 +13,7 @@ fi
 oldIFS=$IFS
 IFS="\n"
 iter=0
-while read line
+while read line || [[ -n "$line" ]]
 do
 	if [ $iter = 0 ]; then
 		domainName=$line		

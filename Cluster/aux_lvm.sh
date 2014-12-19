@@ -13,22 +13,22 @@ fi
 oldIFS=$IFS
 IFS="\n"
 iter=0
-while read line
+while read line || [[ -n "$line" ]]
 do
 	if [ $iter = 0 ]; then
 		volumeGroupName=$line
 	elif [ $iter = 1 ]; then
 		deviceListInGroup=$line
 	else
-		volumes[$(($iter-2))]=$linea
+		volumes[$(($iter-2))]=$line
 	fi    
 	let iter+=1
 done < $1
 IFS=$oldIFS
 
 # Install the service
-ssh $2 "'apt-get install -y lvm2'"
-ssh $2 "'pvcreate $deviceListInGroup;vgcreate $volumeGroupName $deviceListInGroup'"
+ssh $2 'apt-get install -y lvm2' < /dev/null
+ssh $2 'pvcreate $deviceListInGroup;vgcreate $volumeGroupName $deviceListInGroup' < /dev/null
 
 for sentence in volumes
 do
@@ -43,6 +43,6 @@ do
 		let iter+=1
 	done
 	
-	ssh $2 "'lvcreate --name $name --size $size $volumeGroupName'"
+	ssh $2 'lvcreate --name $name --size $size $volumeGroupName' < /dev/null
 	
 done
