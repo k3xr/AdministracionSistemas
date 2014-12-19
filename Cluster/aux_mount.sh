@@ -13,7 +13,7 @@ fi
 oldIFS=$IFS
 IFS="\n"
 iter=0
-while read line
+while read line || [[ -n "$line" ]]
 do
 	if [ $iter = 0 ]; then
 		deviceName=$line
@@ -21,13 +21,13 @@ do
 		mountPoint=$line
 		
 		# Makes changes permanent
-		ssh $2 'echo "#File system: $deviceName" >> /etc/fstab; echo "$deviceName $mountPoint auto defaults,auto,rw 0 0" >> /etc/fstab'
-		
+		#echo 'ssh' $2 '"#File system: '$deviceName'" >> /etc/fstab; echo "'$deviceName' '$mountPoint' auto defaults,auto,rw 0 0" >> /etc/fstab'
+		ssh $2  'whoami' < /dev/null
 	else
 		echo "Error in service config file"
 		exit 1
 	fi
     
 	let iter+=1
-done < $1
+done < "$1"
 IFS=$oldIFS

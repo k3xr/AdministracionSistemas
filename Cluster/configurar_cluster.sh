@@ -11,7 +11,7 @@ fi
 
 # Aqui se comprueba el archivo de configuracion 
 IFS=" ,#"
-while read maquina servicio config || [[ -n "$line" ]]
+while read maquina servicio config || [[ -n "$maquina" ]]
 do
     if [ ! -z $maquina ] || [ ! -z $servicio ] || [ ! -z $config ] 
     then
