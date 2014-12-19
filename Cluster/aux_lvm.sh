@@ -26,7 +26,9 @@ do
 done < $1
 IFS=$oldIFS
 
-ssh $2 'pvcreate $deviceListInGroup;vgcreate $volumeGroupName $deviceListInGroup'
+# Install the service
+ssh $2 "'apt-get install -y lvm2'"
+ssh $2 "'pvcreate $deviceListInGroup;vgcreate $volumeGroupName $deviceListInGroup'"
 
 for sentence in volumes
 do
@@ -41,6 +43,6 @@ do
 		let iter+=1
 	done
 	
-	ssh $2 'lvcreate --name $name --size $size $volumeGroupName'
+	ssh $2 "'lvcreate --name $name --size $size $volumeGroupName'"
 	
 done
