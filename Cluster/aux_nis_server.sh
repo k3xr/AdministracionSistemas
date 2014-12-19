@@ -28,5 +28,13 @@ ssh $2 'apt-get -y install nis -qq --force-yes' < /dev/null
 # Configs remote NIS service
 ssh $2 'echo ' $domainName' > /etc/defaultdomain' < /dev/null
 ssh $2 /usr/lib/yp/ypinit -m < /dev/null
-ssh $2 'echo NISSERVER=master >> /etc/default/nis' < /dev/null
+
+local result
+result=$(ssh $2 grep -q NISSERVER=master /etc/default/nis)
+ 
+if [result]
+	# Add NISSERVER=master
+	ssh $2 'echo NISSERVER=master >> /etc/default/nis' < /dev/null
+fi
+
 ssh $2 /etc/init.d/nis restart < /dev/null
