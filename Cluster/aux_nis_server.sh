@@ -26,4 +26,4 @@ do
 done < $1
 IFS=$oldIFS
 
-ssh $2 '/usr/lib/yp/ypinit -m;NISSERVER=master >> /etc/default/nis;/etc/init.d/nis restart'
+ssh $2 "'/usr/lib/yp/ypinit -m;NISSERVER=master >> /etc/default/nis;/etc/init.d/nis restart'"
