@@ -24,10 +24,10 @@ then
 fi
 
 # Installs nfs service
-ssh $2  'apt-get install -y nfs-common -qq --force-yes' < /dev/null
-ssh $2  'apt-get install -y nfs-kernel-server -qq --force-yes' < /dev/null
+ssh $2 apt-get install -y nfs-common -qq --force-yes < /dev/null
+ssh $2 apt-get install -y nfs-kernel-server -qq --force-yes < /dev/null
 
 for item in ${exportedDirs[*]}
 do
-	ssh $2  'echo "$item (rw)" >> /etc/exports' < /dev/null
+	ssh $2 'echo '$item' (rw) >> /etc/exports' < /dev/null
 done

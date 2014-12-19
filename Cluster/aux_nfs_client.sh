@@ -18,9 +18,9 @@ do
 done < "$1"
 
 # Installs nfs service
-ssh $2  'apt-get install -y nfs-common -qq --force-yes' < /dev/null
+ssh $2 apt-get install -y nfs-common -qq --force-yes < /dev/null
 
 for item in ${remoteDir[*]}
 do
-	ssh $2  'echo "$item nfs defaults,auto 0 0' < /dev/null
+	ssh $2 'echo '$item' nfs defaults,auto 0 0 >> /etc/fstab' < /dev/null
 done

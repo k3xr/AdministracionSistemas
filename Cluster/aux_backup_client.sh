@@ -23,7 +23,7 @@ do
 		remoteDirForBackup=$line
 		
 	elif [ $iter = 3 ]; then
-		 =$line
+		backupFrequency=$line
 	else
 		echo "Error in backup client service config file"
 		exit 1
@@ -32,11 +32,11 @@ do
 done < "$1"
 
 # Installs rsync if needed
-ssh $2 'apt-get install -y rsync -qq --force-yes' < /dev/null
+ssh $2 apt-get install -y rsync -qq --force-yes < /dev/null
 
 # Sets cron file to make the backup
-ssh $2 'echo "* */$backupFrequency * * * root rsync -avz $localDirForBackup root@$backupServerAddress:$remoteDirForBackup" >> /etc/crontab' < /dev/null
+ssh $2 'echo * */'$backupFrequency' * * * root rsync -avz '$localDirForBackup' root@'$backupServerAddress':'$remoteDirForBackup' >> /etc/crontab' < /dev/null
 
 # Restarts cron service
-ssh $2 'service cron restart' < /dev/null
+ssh $2 service cron restart < /dev/null
 

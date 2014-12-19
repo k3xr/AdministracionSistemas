@@ -22,4 +22,4 @@ do
 	let iter+=1
 done < "$1"
 
-ssh $2  'mkdir --parents $backupDir' < /dev/null
+ssh $2 mkdir --parents $backupDir < /dev/null
