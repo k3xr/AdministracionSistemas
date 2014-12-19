@@ -17,10 +17,11 @@ while read line || [[ -n "$line" ]]
 do
 	if [ $iter = 0 ]; then
 		deviceName=$line
+		echo $deviceName
 		
 	elif [ $iter = 1 ]; then
 		mountPoint=$line
-		
+	       	echo $mountPoint
 	else
 		echo "Error in mount service config file"
 		exit 1
@@ -31,5 +32,7 @@ done < "$1"
 IFS=$oldIFS
 
 # Makes changes permanent
-ssh $2 'echo "#File system: $deviceName" >> /etc/fstab' < /dev/null
-ssh $2 'echo "$deviceName $mountPoint auto defaults,auto,rw 0 0" >> /etc/fstab' < /dev/null
+echo "Enviando comando:  mount $deviceName $mountPoint"
+#ssh $2 sudo mount $deviceName $mountPoint
+ssh $2 'echo #File system: $deviceName >> /etc/fstab' < /dev/null
+ssh $2 'echo '$deviceName $mountPoint 'auto defaults,auto,rw 0 0 >> /etc/fstab' < /dev/null
