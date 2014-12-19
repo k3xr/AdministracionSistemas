@@ -19,24 +19,23 @@ do
 	
 	#Ponemos un switch case para actuar segun el servicio
 	case $servicio in
-	    mount)
-	       	./aux_mount.sh $config $maquina;;
+	    sudo ./aux_mount.sh $config $maquina;;
 	    raid)
-       		./aux_raid.sh $config $maquina;;
+       		sudo ./aux_raid.sh $config $maquina;;
 	    lvm)
-			./aux_lvm.sh $config $maquina;;
+			sudo ./aux_lvm.sh $config $maquina;;
 	    nis_server)
-			./aux_nis_server.sh $config $maquina;;
+			sudo ./aux_nis_server.sh $config $maquina;;
 	    nis_client)
-			./aux_nis_client.sh $config $maquina;;
+			sudo ./aux_nis_client.sh $config $maquina;;
 	    nfs_server)
-			./aux_nfs_server.sh $config $maquina;;
+			sudo ./aux_nfs_server.sh $config $maquina;;
 	    nfs_client)
-			./aux_nfs_client.sh $config $maquina;;
+			sudo ./aux_nfs_client.sh $config $maquina;;
 	    backup_server)
-			./aux_backup_server.sh $config $maquina;;
+			sudo ./aux_backup_server.sh $config $maquina;;
 	    backup_client)
-			./aux_backup_client.sh $config $maquina;;
+			sudo ./aux_backup_client.sh $config $maquina;;
 	esac
 
     fi
