@@ -10,8 +10,6 @@ then
 fi
 
 # Checks config file
-oldIFS=$IFS
-IFS="\n"
 iter=0
 while read line || [[ -n "$line" ]]
 do
@@ -29,10 +27,9 @@ do
     
 	let iter+=1
 done < "$1"
-IFS=$oldIFS
 
 # Makes changes permanent
 echo "Enviando comando:  mount $deviceName $mountPoint"
-#ssh $2 sudo mount $deviceName $mountPoint
+ssh $2 sudo mount $deviceName $mountPoint < /dev/null
 ssh $2 'echo #File system: $deviceName >> /etc/fstab' < /dev/null
 ssh $2 'echo '$deviceName $mountPoint 'auto defaults,auto,rw 0 0 >> /etc/fstab' < /dev/null
