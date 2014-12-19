@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 
 # Checks number of expected args
 EXPECTED_ARGS=2

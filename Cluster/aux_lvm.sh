@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 
 # Checks number of expected args
 EXPECTED_ARGS=2
@@ -30,9 +30,9 @@ IFS=$oldIFS
 echo "Installing the service -----------------------------------------------"
 ssh $2 'apt-get install -y lvm2 -qq --force-yes' < /dev/null
 echo "Executing pvcreate $deviceListInGroup --------------------------------"
-ssh $2 'pvcreate $deviceListInGroup' < /dev/null 
+ssh $2 pvcreate $deviceListInGroup < /dev/null 
 echo "Executing vgcreate $volumeGroupName $deviceListInGroup ---------------"
-ssh $2 'vgcreate $volumeGroupName $deviceListInGroup' < /dev/null
+ssh $2 vgcreate $volumeGroupName $deviceListInGroup < /dev/null
 
 for sentence in ${volumes[*]}
 do
@@ -40,5 +40,5 @@ IFS=$' '
     read -a volume <<< "$sentence"
     name_vol = ${volume[0]}
     size_vol = ${volume[1]}	
-	ssh $2 'lvcreate --name $name_vol --size $size_vol $volumeGroupName' < /dev/null
+    ssh $2 lvcreate --name $name_vol --size $size_vol $volumeGroupName < /dev/null
 done

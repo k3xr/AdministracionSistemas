@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 
 # Checks number of expected args
 EXPECTED_ARGS=2
@@ -24,8 +24,8 @@ then
 fi
 
 # Installs nfs service
-ssh $2 apt-get install -y nfs-common -qq --force-yes < /dev/null
-ssh $2 apt-get install -y nfs-kernel-server -qq --force-yes < /dev/null
+ssh $2 apt-get install -y nfs-common -qq --force-yes < /dev/null > /dev/null
+ssh $2 apt-get install -y nfs-kernel-server -qq --force-yes < /dev/null > /dev/null
 
 for item in ${exportedDirs[*]}
 do

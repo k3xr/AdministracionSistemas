@@ -22,7 +22,7 @@ read -a Array_Dispositivos <<< "${ARRAY[2]}"
 echo "Enviando comando por ssh "
 
 #Primero debemos instalar mdadm
-ssh $2 sudo apt-get install mdadm
+ssh $2 sudo apt-get install mdadm > /dev/null
 
 #Realizamos el envio 
 echo "ssh sudo $2 mdadm --create --name=${ARRAY[0]} --metadata=0.90 --level=${ARRAY[1]} --raid-devices=${#Array_Dispositivos[*]} ${ARRAY[0]} ${ARRAY[2]}"
