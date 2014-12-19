@@ -42,7 +42,5 @@ do
 		fi    
 		let iter+=1
 	done
-	
 	ssh $2 'lvcreate --name $name --size $size $volumeGroupName' < /dev/null
-	
 done

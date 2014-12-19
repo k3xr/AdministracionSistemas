@@ -26,4 +26,10 @@ do
 done < $1
 IFS=$oldIFS
 
-ssh $2 "'/usr/lib/yp/ypinit -m;NISSERVER=master >> /etc/default/nis;/etc/init.d/nis restart'"
+# Installs NIS service
+ssh $2 'apt-get -y install nis' < /dev/null
+# Configs remote NIS service
+ssh $2 'echo "$domainName" >> /etc/defaultdomain' < /dev/null
+ssh $2 '/usr/lib/yp/ypinit -m' < /dev/null
+ssh $2 'NISSERVER=master >> /etc/default/nis' < /dev/null
+ssh $2 '/etc/init.d/nis restart' < /dev/null
